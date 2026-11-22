@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+html, body { background: #F8F5EF; color: #2D332F; }
+body { font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+/* Cormorant utilise des chiffres elzéviriens par défaut : on force les chiffres alignés (D-001, montants) */
+.font-serif, .report h1, .report h2, .report h3, .report [style*='Cormorant'] { font-variant-numeric: lining-nums; }
+
+@layer components {
+  .label-caps { @apply font-label text-[10.5px] font-semibold uppercase tracking-[0.14em] text-sauge; }
+  .field { @apply w-full rounded-md border border-pierre bg-white px-3 py-2.5 text-[15px] text-charbon placeholder:text-charbon/35 focus:border-sauge focus:outline-none focus:ring-2 focus:ring-sauge/25; }
+  .btn { @apply inline-flex min-h-[40px] items-center justify-center gap-2 rounded-md px-4 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-sauge/40 disabled:opacity-40; }
+  .btn-primary { @apply btn bg-foret text-ivoire hover:bg-[#2a3f33]; }
+  .btn-ghost { @apply btn border border-pierre bg-white text-charbon hover:border-sauge hover:text-foret; }
+  .btn-quiet { @apply btn px-2 text-sauge hover:text-foret; }
+  .card { @apply rounded-lg border border-pierre-100 bg-white; }
+}
+
+/* ───────────────────────── Rendu du livrable (A4) ───────────────────────── */
+
+.report { font-family: Inter, sans-serif; font-size: 9.5pt; line-height: 1.5; color: #2D332F; }
+.report h1, .report h2, .report h3 { font-family: "Cormorant Garamond", Georgia, serif; color: #334B3D; font-weight: 600; }
+.report h2 { font-size: 21pt; line-height: 1.1; margin: 0 0 4mm; }
+.report h3 { font-size: 13.5pt; margin: 6mm 0 2mm; }
+.report p { margin: 0 0 2.5mm; }
+.report ul { list-style: disc; }
+.report ul li::marker { color: #B97A5B; }
+.report .eyebrow { font-family: Montserrat, sans-serif; font-size: 7pt; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #68725E; }
+.report table { width: 100%; border-collapse: collapse; font-size: 8.5pt; }
+.report th { font-family: Montserrat, sans-serif; font-size: 6.8pt; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #68725E; text-align: left; padding: 2mm 2mm; border-bottom: 0.5pt solid #68725E; }
+.report td { padding: 1.8mm 2mm; border-bottom: 0.5pt solid #D6C7AF; vertical-align: top; }
+.report .num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.report .rule { border-top: 0.5pt solid #D6C7AF; }
+.report .boxed { border: 0.5pt solid #D6C7AF; border-radius: 1.5mm; padding: 3.5mm 4mm; }
+.report .keep { break-inside: avoid; page-break-inside: avoid; }
+
+/* Feuille à l'écran : reproduit le format A4 et ses marges */
+.report-page {
+  position: relative; width: 210mm; min-height: 297mm; padding: 16mm 15mm 20mm;
+  background: #fff; margin: 0 auto 8mm; box-shadow: 0 1px 2px rgba(45,51,47,.08), 0 8px 24px rgba(45,51,47,.08);
+}
+.report-page .folio {
+  position: absolute; left: 15mm; right: 15mm; bottom: 8mm; display: flex; justify-content: space-between;
+  font-family: Montserrat, sans-serif; font-size: 6.5pt; letter-spacing: .06em; color: #68725E;
+  border-top: 0.5pt solid #D6C7AF; padding-top: 2mm;
+}
+
+/* ───────────────────────── Impression / PDF ───────────────────────── */
+
+/* Les règles @page (marges, pied de page, numéros) sont dans <style id="page-natif"> (app/layout.tsx),
+   désactivées pendant l'impression paginée du rapport (lib/pagination.ts). */
+
+@media print {
+  html, body { background: #fff !important; }
+  body.paged-mode > *:not(.paged-out) { display: none !important; }
+  body.paged-mode .paged-out { position: static !important; left: auto !important; }
+  body:not(.paged-mode) .report-page { width: auto; min-height: 0; padding: 0; margin: 0; box-shadow: none; break-before: page; }
+  body:not(.paged-mode) .report-page:first-child { break-before: auto; }
+  body:not(.paged-mode) .report-page.cover { height: 297mm; padding: 22mm 20mm; }
+  body:not(.paged-mode) .report-page.doc { padding: 16mm 15mm; }
+  .report-page .folio { display: none; }
+  .report-zoom { zoom: 1 !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* Aperçu : un clic sur un passage ouvre l'endroit correspondant dans la rédaction */
+@media screen {
+  .report-cliquable .report-page { cursor: pointer; }
+  .report-cliquable [data-champ]:hover, .report-cliquable [data-desordre]:hover { outline: 1.5px dashed #B97A5B; outline-offset: 1mm; border-radius: 1mm; }
+}
+
+/* Numéros de page dans l'aperçu (calculés comme dans le PDF : marges 16 / 18 mm, 263 mm utiles par feuille) */
+.reperes-pages { position: absolute; inset: 0; pointer-events: none; }
+.repere-page { position: absolute; left: 0; right: 0; border-top: 1px dashed #D6C7AF; }
+.repere-page span { position: absolute; right: 15mm; top: -2.2mm; background: #fff; padding: 0 1.5mm; font: 600 6.5pt Montserrat, sans-serif; letter-spacing: .06em; color: #B97A5B; }
+.folio-num:not(:empty)::before { content: ' · '; }
+@media print { .reperes-pages, .folio-num { display: none !important; } }

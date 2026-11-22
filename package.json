@@ -1,0 +1,34 @@
+{
+  "name": "atelier-existant-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Studio de rédaction des livrables de diagnostic — L'Atelier de l'Existant",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "build:static": "node scripts/build-static.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource/cormorant-garamond": "^5.1.0",
+    "@fontsource/inter": "^5.1.0",
+    "@fontsource/montserrat": "^5.1.0",
+    "@supabase/supabase-js": "^2.119.0",
+    "next": "14.2.15",
+    "pagedjs": "^0.4.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "optionalDependencies": {
+    "puppeteer": "^23.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.17.6",
+    "@types/react": "18.3.12",
+    "autoprefixer": "10.4.20",
+    "postcss": "8.4.47",
+    "tailwindcss": "3.4.14",
+    "typescript": "5.6.3"
+  }
+}

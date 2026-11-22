@@ -1,0 +1,606 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atelier-existant.fr/schemas/dossier.json",
+  "title": "Dossier de diagnostic — L'Atelier de l'Existant",
+  "description": "Schéma unifié d'une affaire, commun aux 4 types de livrables. Miroir de lib/types.ts.",
+  "type": "object",
+  "$defs": {
+    "photo": {
+      "type": "object",
+      "properties": {
+        "src": {
+          "type": "string",
+          "description": "data URL, lien signé, ou vide si la photo est stockée (path)"
+        },
+        "legende": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string",
+          "description": "Chemin dans le bucket Supabase « photos »"
+        }
+      },
+      "required": [
+        "src"
+      ],
+      "additionalProperties": false
+    },
+    "priority": {
+      "enum": [
+        "P1",
+        "P2",
+        "P3"
+      ]
+    },
+    "phase": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 6,
+      "description": "Logique chronologique §6.2"
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "numero": {
+      "type": "string",
+      "pattern": "^DIA-\\d{4}-\\d{3}$"
+    },
+    "type": {
+      "enum": [
+        "avis",
+        "msu",
+        "expertise",
+        "modulaire"
+      ]
+    },
+    "status": {
+      "enum": [
+        "brouillon",
+        "revision",
+        "finalise"
+      ]
+    },
+    "version": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "titreMission": {
+          "type": "string"
+        },
+        "objetMission": {
+          "type": "string"
+        },
+        "client": {
+          "type": "object",
+          "properties": {
+            "nom": {
+              "type": "string"
+            },
+            "qualite": {
+              "type": "string"
+            },
+            "adresse": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "telephone": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "nom",
+            "qualite",
+            "adresse",
+            "email",
+            "telephone"
+          ],
+          "additionalProperties": false
+        },
+        "bien": {
+          "type": "object",
+          "properties": {
+            "adresse": {
+              "type": "string"
+            },
+            "codePostal": {
+              "type": "string"
+            },
+            "commune": {
+              "type": "string"
+            },
+            "cadastre": {
+              "type": "string"
+            },
+            "plu": {
+              "type": "string"
+            },
+            "gps": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "adresse",
+            "codePostal",
+            "commune",
+            "cadastre",
+            "plu",
+            "gps"
+          ],
+          "additionalProperties": false
+        },
+        "dateVisite": {
+          "type": "string",
+          "format": "date"
+        },
+        "dateRapport": {
+          "type": "string",
+          "format": "date"
+        },
+        "intervenant": {
+          "type": "string"
+        },
+        "personnesPresentes": {
+          "type": "string"
+        },
+        "conditionsAcces": {
+          "type": "string"
+        },
+        "meteo": {
+          "type": "string"
+        },
+        "limitesVisite": {
+          "type": "string"
+        },
+        "photoCouverture": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/photo"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "titreMission",
+        "objetMission",
+        "client",
+        "bien",
+        "dateVisite",
+        "dateRapport",
+        "intervenant",
+        "personnesPresentes",
+        "conditionsAcces",
+        "meteo",
+        "limitesVisite",
+        "photoCouverture"
+      ],
+      "additionalProperties": false
+    },
+    "contexte": {
+      "type": "object",
+      "properties": {
+        "datation": {
+          "type": "string"
+        },
+        "typologie": {
+          "type": "string"
+        },
+        "systemeConstructif": {
+          "type": "string"
+        },
+        "materiaux": {
+          "type": "string"
+        },
+        "historique": {
+          "type": "string"
+        },
+        "abords": {
+          "type": "string"
+        },
+        "geotechnique": {
+          "type": "string"
+        },
+        "vues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/photo"
+          }
+        }
+      },
+      "required": [
+        "datation",
+        "typologie",
+        "systemeConstructif",
+        "materiaux",
+        "historique",
+        "abords",
+        "geotechnique",
+        "vues"
+      ],
+      "additionalProperties": false
+    },
+    "souhaits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "rubrique": {
+            "type": "string"
+          },
+          "besoin": {
+            "type": "string"
+          },
+          "importance": {
+            "enum": [
+              "essentiel",
+              "souhaite",
+              "optionnel"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "rubrique",
+          "besoin",
+          "importance"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "zones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "pattern": "^(EXT|FAC|PC|RDC|ETG|COM|CAV)-\\d{2}$"
+          },
+          "nom": {
+            "type": "string"
+          },
+          "categorie": {
+            "enum": [
+              "EXT",
+              "FAC",
+              "PC",
+              "RDC",
+              "ETG",
+              "COM",
+              "CAV"
+            ]
+          },
+          "observations": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "nom",
+          "categorie",
+          "observations"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "desordres": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "numero": {
+            "type": "string",
+            "pattern": "^D-\\d{3}$"
+          },
+          "zoneCode": {
+            "type": "string"
+          },
+          "element": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "priorite": {
+            "$ref": "#/$defs/priority"
+          },
+          "phase": {
+            "$ref": "#/$defs/phase"
+          },
+          "photoEnsemble": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/photo"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "photoDetail": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/photo"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "constat": {
+            "type": "string",
+            "description": "CONST"
+          },
+          "analyse": {
+            "type": "string",
+            "description": "HYP"
+          },
+          "confiance": {
+            "enum": [
+              "faible",
+              "moyen",
+              "eleve"
+            ]
+          },
+          "aVerifier": {
+            "type": "boolean"
+          },
+          "investigations": {
+            "type": "string"
+          },
+          "preconisation": {
+            "type": "string",
+            "description": "ACT"
+          },
+          "lot": {
+            "type": "string"
+          },
+          "chiffrage": {
+            "type": "object",
+            "properties": {
+              "quantite": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "unite": {
+                "type": "string"
+              },
+              "bas": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "haut": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "quantite",
+              "unite",
+              "bas",
+              "haut"
+            ],
+            "additionalProperties": false
+          },
+          "autresPhotos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/photo"
+            }
+          },
+          "aRelire": {
+            "type": "boolean",
+            "description": "Texte pré-rédigé à partir d'un modèle, pas encore relu"
+          }
+        },
+        "required": [
+          "id",
+          "numero",
+          "zoneCode",
+          "element",
+          "type",
+          "priorite",
+          "phase",
+          "photoEnsemble",
+          "photoDetail",
+          "constat",
+          "analyse",
+          "confiance",
+          "aVerifier",
+          "investigations",
+          "preconisation",
+          "lot",
+          "chiffrage"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "mesures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "categorie": {
+            "enum": [
+              "tirant",
+              "etaiement",
+              "purge",
+              "perimetre",
+              "bachage",
+              "instrumentation"
+            ]
+          },
+          "localisation": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "delai": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "categorie",
+          "localisation",
+          "description",
+          "delai"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "avisTiers": {
+      "type": "string"
+    },
+    "conclusion": {
+      "type": "object",
+      "properties": {
+        "bilan": {
+          "type": "string"
+        },
+        "conclusion": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "bilan",
+        "conclusion"
+      ],
+      "additionalProperties": false
+    },
+    "planning": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "phase": {
+            "$ref": "#/$defs/phase"
+          },
+          "debut": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "duree": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "phase",
+          "debut",
+          "duree"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "annuaire": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "lot": {
+            "type": "string"
+          },
+          "nom": {
+            "type": "string"
+          },
+          "ville": {
+            "type": "string"
+          },
+          "contact": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "lot",
+          "nom",
+          "ville",
+          "contact"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "finances": {
+      "type": "object",
+      "properties": {
+        "aleasPct": {
+          "type": "number",
+          "minimum": 0
+        },
+        "tvaPct": {
+          "type": "number",
+          "enum": [
+            5.5,
+            10,
+            20
+          ]
+        }
+      },
+      "required": [
+        "aleasPct",
+        "tvaPct"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "id",
+    "numero",
+    "type",
+    "status",
+    "version",
+    "createdAt",
+    "updatedAt",
+    "meta",
+    "contexte",
+    "souhaits",
+    "zones",
+    "desordres",
+    "mesures",
+    "avisTiers",
+    "conclusion",
+    "planning",
+    "annuaire",
+    "finances"
+  ],
+  "additionalProperties": false
+}

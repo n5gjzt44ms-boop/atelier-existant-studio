@@ -1,0 +1,11 @@
+# Hébergement gratuit sur Netlify (site statique : aucune fonction serveur)
+[build]
+  command = "npm run build:static"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "20"
+  PUPPETEER_SKIP_DOWNLOAD = "true"   # Puppeteer inutile en statique (PDF via impression)
+
+# Les variables NEXT_PUBLIC_SUPABASE_URL et NEXT_PUBLIC_SUPABASE_ANON_KEY
+# se renseignent dans Netlify : Site configuration → Environment variables.
