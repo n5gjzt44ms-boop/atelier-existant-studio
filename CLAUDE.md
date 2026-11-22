@@ -9,12 +9,15 @@ Application web de rédaction des livrables de diagnostic du bâti ancien pour *
 préconisations, synthèse), aperçu A4 en direct, export PDF paginé. Elle couvre aussi la gestion de
 l'activité (devis, factures, agenda, prospection, relation client).
 
-- **Propriétaire** : Lorine Gratadour. Le dépôt GitHub et le projet Supabase sont **à son nom**.
+- **Utilisatrice** : Lorine Gratadour. Le projet Supabase (si mode en ligne) est **à son nom**.
+- **Dépôt GitHub** : `n5gjzt44ms-boop/atelier-existant-studio` (compte de Benoît Prudhomme), publié sur
+  https://n5gjzt44ms-boop.github.io/atelier-existant-studio/. Sur ce compte, ne toucher qu'à **ce
+  dépôt** : jamais aux autres dépôts de Benoît (Valvora, ProgMeca, etc.).
 - **Répondre en français**, avec des mots simples : l'utilisatrice n'est pas développeuse.
 - **Solutions gratuites uniquement.**
-- **Aucun lien avec les comptes de Benoît Prudhomme** (GitHub `n5gjzt44ms-boop`, organisation Supabase
-  « ProgMeca » avec les projets Mecapp et Valvora). Ne jamais utiliser ces comptes, ni d'outil ou de
-  connecteur branché dessus (par exemple un connecteur Supabase relié à ProgMeca) pour ce projet.
+- **Aucun lien avec l'organisation Supabase « ProgMeca »** de Benoît (projets Mecapp et Valvora). Ne
+  jamais l'utiliser, ni d'outil ou de connecteur branché dessus (par exemple un connecteur Supabase
+  relié à ProgMeca) pour ce projet.
 - Supabase : seulement la clé **publishable** (`sb_publishable_…`) côté application ; jamais la clé
   secrète / `service_role`. La sécurité repose sur les règles RLS (`supabase/migrations`).
 
