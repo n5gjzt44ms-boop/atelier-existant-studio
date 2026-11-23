@@ -73,10 +73,34 @@ vide en statique) : ne pas introduire de chemins absolus (`/logo.png`, `fetch('/
 
 ## Méthode
 
+**Publication automatique (règle de travail demandée par Benoît)** : pour chaque changement demandé,
+le faire de bout en bout sans redemander la permission de publier :
+1. modifier le code ;
+2. `npm run typecheck` puis `npm run build:static` : tout doit passer (sinon corriger, ne pas publier) ;
+3. vérifier le parcours concerné dans le navigateur quand c'est visible à l'écran ;
+4. `git add` des fichiers modifiés, `git commit` (message court en français), `git push` sur `main`
+   (remote `origin` = `n5gjzt44ms-boop/atelier-existant-studio`, et seulement lui) ;
+5. suivre « Publier le site » (`gh run watch`), vérifier
+   https://n5gjzt44ms-boop.github.io/atelier-existant-studio/ et résumer en français.
+
+Demander avant : tout changement de schéma de données ou risque pour les données déjà saisies, toute
+action sur un autre dépôt, sur les réglages GitHub ou sur Supabase.
+
 - Vérifier dans un navigateur (Puppeteer est en dépendance optionnelle) : parcours concerné +
   export PDF, avant de publier.
 - Limiter le nombre de publications inutiles ; regrouper les changements.
 - Ne jamais toucher aux données de l'utilisatrice sans sauvegarde préalable.
+
+## État actuel
+
+- En ligne sur GitHub Pages depuis le 22/11/2026 (dépôt créé et publié ce jour-là).
+- Données de Lorine pas encore récupérées de l'ancien site Netlify (`GUIDE-GITHUB.md`, parties 1 et 2).
+
+## Journal
+
+- 22/11/2026 : import initial, dépôt `n5gjzt44ms-boop/atelier-existant-studio`, GitHub Pages activé.
+- 23/11/2026 : `GUIDE-GITHUB.md` mis à jour, publication automatique, `.claude/` (réglages, aperçu,
+  `/fin-de-session`).
 
 ## À prévoir
 

@@ -1,11 +1,20 @@
-# Passer le Studio sur GitHub (gratuit, sans crédits)
+# Le Studio sur GitHub (gratuit, sans crédits)
 
-Tout se fait sur **les comptes de Lorine** (adresse l.gratadour12…) : GitHub, et Supabase si besoin.
-Compter environ 30 minutes. L'ordre compte : **d'abord sauvegarder**, ensuite déménager.
+Le Studio est déjà en ligne :
+
+**https://n5gjzt44ms-boop.github.io/atelier-existant-studio/**
+
+- Dépôt GitHub : `n5gjzt44ms-boop/atelier-existant-studio` (compte de Benoît, dépôt public, à part de
+  ses autres projets).
+- Dossier sur l'ordinateur de Benoît : `Documents\atelier-existant-studio`.
+- Publication : automatique à chaque envoi sur `main` (2 à 3 minutes), par GitHub Pages.
+
+Il reste à **récupérer les données de Lorine** (parties 1 et 2). L'ordre compte : **d'abord
+sauvegarder**, ensuite importer.
 
 ---
 
-## 1. Sauvegarder tout ce qui est dans l'ancien site
+## 1. Sauvegarder tout ce qui est dans l'ancien site (dans le Chrome de Lorine)
 
 Les dossiers et la bibliothèque sont enregistrés dans le navigateur, à l'adresse de l'ancien site
 (`capable-bonbon-403d66.netlify.app`). Ils ne suivront pas tout seuls : on les met dans un fichier.
@@ -22,52 +31,32 @@ Les dossiers et la bibliothèque sont enregistrés dans le navigateur, à l'adre
 
 Rien n'est effacé de l'ancien site : c'est une copie.
 
-## 2. Créer le compte GitHub
+## 2. Retrouver les dossiers sur la nouvelle adresse
 
-1. Sur github.com → **Sign up**, avec l'adresse de Lorine. Choisissez un nom d'utilisateur
-   (il apparaîtra dans l'adresse du site, par exemple `lgratadour`).
-2. Installez **GitHub Desktop** (desktop.github.com) et connectez-le à ce compte
-   (File → Options → Accounts → Sign in).
-
-## 3. Mettre le logiciel sur GitHub
-
-1. Décompressez `atelier-existant-studio.zip` dans un dossier, par exemple `Documents\atelier-studio`.
-2. GitHub Desktop → **File → Add local repository** → choisissez ce dossier → cliquez
-   **« create a repository »** puis **Create repository**.
-3. Cliquez **Publish repository** :
-   - nom : `atelier-studio` ;
-   - **décochez « Keep this code private »** : GitHub Pages n'est gratuit qu'avec un dépôt public.
-     Vos dossiers et vos clients ne sont **pas** dans le code (ils restent dans le navigateur ou dans
-     Supabase) ; seuls le logiciel et les textes de la bibliothèque sont visibles.
-4. Sur github.com, ouvrez le dépôt → **Settings → Pages** → **Source : GitHub Actions**.
-5. Onglet **Actions** : la publication démarre (2 à 3 minutes, pastille verte quand c'est fini).
-   Si rien ne démarre : Actions → « Publier le site » → **Run workflow**.
-6. Le site est en ligne à l'adresse `https://<nom-utilisateur>.github.io/atelier-studio/`.
-   Ajoutez-la à vos favoris.
-
-## 4. Retrouver vos dossiers sur la nouvelle adresse
-
-1. Ouvrez la nouvelle adresse → **Dossiers** → **Importer** → choisissez le fichier de l'étape 1.
+1. Ouvrez **https://n5gjzt44ms-boop.github.io/atelier-existant-studio/** (dans le Chrome de Lorine)
+   → **Dossiers** → **Importer** → choisissez le fichier de l'étape 1.
 2. Un bandeau propose **« Restaurer la bibliothèque »** : cliquez-le pour retrouver vos désordres,
    préconisations et phrases personnalisés.
-3. Vérifiez votre dossier en cours, puis continuez à rédiger normalement.
+3. Vérifiez votre dossier en cours, puis continuez à rédiger normalement. Ajoutez l'adresse à vos
+   favoris.
 
 Pensez à cliquer **« Sauvegarde complète »** (page Dossiers) de temps en temps : c'est votre copie de
-secours.
+secours. Les données restent dans le navigateur : vos dossiers et vos clients ne sont **pas** dans le
+code publié, seuls le logiciel et les textes de la bibliothèque sont visibles.
 
-## 5. (Facultatif) Enregistrer en ligne avec Supabase
+## 3. Faire évoluer le logiciel avec Claude Code
 
-Utile pour retrouver vos dossiers sur plusieurs appareils et ne plus dépendre du navigateur.
-Suivre `GUIDE-SUPABASE.md`, avec le compte Supabase de Lorine uniquement. Le passage en ligne envoie
-les dossiers et la bibliothèque du navigateur vers votre compte.
+- Ouvrez Claude Code (application Claude, onglet Code) sur le dossier
+  `Documents\atelier-existant-studio`. Le fichier `CLAUDE.md` lui donne tout le contexte.
+- Demandez simplement le changement voulu, en français. Claude Code le fait, vérifie que tout
+  fonctionne, puis l'envoie lui-même sur `main` : le site se met à jour tout seul en 2 à 3 minutes,
+  sans limite de crédits. Il donne ensuite l'adresse pour vérifier.
+- En fin de séance, la commande `/fin-de-session` met à jour `CLAUDE.md` (ce qui a été fait, ce qui
+  reste à faire) pour que la séance suivante reparte du bon endroit.
+- Claude Code ne touche qu'à ce dépôt : jamais aux autres projets GitHub de Benoît.
 
-## 6. Faire évoluer le logiciel avec Claude Code
+## 4. (Facultatif) Enregistrer en ligne avec Supabase
 
-- Installez l'application **Claude** (bureau) et ouvrez **Claude Code** sur le dossier
-  `atelier-studio` (celui de GitHub Desktop). Le fichier `CLAUDE.md` lui donne tout le contexte.
-- Pour publier une amélioration : Claude Code fait les modifications, puis dans GitHub Desktop
-  **Commit to main** → **Push origin**. Le site se met à jour tout seul en 2 à 3 minutes,
-  sans limite de crédits.
-- Pour garder les comptes séparés, laissez Claude Code utiliser **GitHub Desktop sur cet ordinateur**
-  (connecté au compte de Lorine) plutôt qu'une connexion GitHub ajoutée dans les réglages du compte
-  Claude, qui est partagé.
+Utile pour retrouver les dossiers sur plusieurs appareils et ne plus dépendre du navigateur.
+Suivre `GUIDE-SUPABASE.md`, avec un compte Supabase de Lorine uniquement (**jamais** l'organisation
+ProgMeca). Le passage en ligne envoie les dossiers et la bibliothèque du navigateur vers ce compte.

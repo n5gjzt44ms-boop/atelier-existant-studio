@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "Bash(npm run typecheck)",
+      "Bash(npm run build:static)",
+      "Bash(npm run dev)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push origin main)",
+      "Bash(git push)",
+      "Bash(gh run list:*)",
+      "Bash(gh run watch:*)",
+      "Bash(gh run view:*)",
+      "PowerShell(npm install)",
+      "PowerShell(npm run typecheck)",
+      "PowerShell(npm run build:static)",
+      "PowerShell(npm run dev)",
+      "PowerShell(git status:*)",
+      "PowerShell(git diff:*)",
+      "PowerShell(git log:*)",
+      "PowerShell(git add:*)",
+      "PowerShell(git commit:*)",
+      "PowerShell(git push origin main)",
+      "PowerShell(git push)",
+      "PowerShell(gh run list:*)",
+      "PowerShell(gh run watch:*)",
+      "PowerShell(gh run view:*)"
+    ]
+  }
+}
