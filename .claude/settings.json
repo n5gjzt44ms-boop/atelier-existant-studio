@@ -1,4 +1,8 @@
 {
+  "env": {
+    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "50"
+  },
+  "idleCompaction": true,
   "permissions": {
     "allow": [
       "Bash(npm install)",
